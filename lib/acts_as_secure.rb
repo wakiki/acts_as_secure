@@ -112,12 +112,12 @@ module ActiveRecord::Acts::ActsAsSecure
       end
       
       def secure_encrypt(arg)
-        secure_crypto_provider.encrypt(arg.to_yaml)
+        secure_crypto_provider.encrypt(arg)
       end 
            
       def secure_decrypt(arg)
         begin
-          YAML.load(secure_crypto_provider.decrypt(arg))
+          secure_crypto_provider.decrypt(arg)
         rescue Exception => ex
           raise KeyError, "Failed to decode the field. Incorrect key?"
         end
